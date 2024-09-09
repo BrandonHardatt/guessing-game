@@ -7,8 +7,8 @@ import GuessContainer from "../components/game/GuessContainer";
 import COLORS from "../constants/colors";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
-import Ionicons from "@expo/vector-icons"
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import { FontAwesome5 } from '@expo/vector-icons';
+import { audioPlayer } from '../util/audioPlayer';  // Import the audioPlayer object
 
 let min = 1;
 let max = 99;
@@ -19,8 +19,20 @@ const PlayGameScreen = ({validNumber, onGameOver}) => {
     [currentGuess, setCurrentGuess] = useState(generateRandomIntegerExcluding(min, max, validNumber));
     const handleCurrentGuess = (guess) => setCurrentGuess(guess);
 
+    // Load and play the dice roll sound when the button is pressed
+    const handleRollDice = async () => {
+        try {
+            await audioPlayer.load(require('../assets/audio/dice-roll.mp3'));  // Load the sound file
+            await audioPlayer.play();  // Play the loaded sound
+        } catch (error) {
+            console.log('Error handling dice roll sound:', error);
+        }
+    };
+
 
     const handleGuess = () => {
+
+        handleRollDice();
 
         (currentGuess < validNumber) ? min = currentGuess : max = currentGuess;
 

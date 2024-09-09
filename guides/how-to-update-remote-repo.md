@@ -64,7 +64,7 @@ git pull origin main
 
 ### One-liner
 ```bash
-git add . && git commit -m "Updating guides" && git push origin main
+git add . && git commit -m "Adding audio player" && git push origin main
 ```
 
 #### Recap:
