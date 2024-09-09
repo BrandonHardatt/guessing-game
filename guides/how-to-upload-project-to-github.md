@@ -7,7 +7,7 @@ This guide will walk you through the steps required to create a new project and 
 - [ ] *Git installed on your system*. Installing git is covered in the guide to setting up your development environment.
    <a href="how-to-setup-your-development-environment.md" style="display: inline-block; padding: 5px 10px; font-size: 14px; font-weight: bold; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Development Environment Guide</a>
 
-- [ ] *Review the basics*. A guide on using git and github is provided.
+- [ ] *Review the basics of git and github*. A guide on using git and github is provided.
    <a href="how-to-use-git-and-github.md" style="display: inline-block; padding: 5px 10px; font-size: 14px; font-weight: bold; color: white; background-color: #007bff; text-decoration: none; border-radius: 5px;">Git and Github Guide</a>
 
 ## Steps to Upload a Project to GitHub
