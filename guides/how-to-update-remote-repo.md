@@ -62,6 +62,11 @@ git pull origin main
 - **Committing Unstaged Changes:**
   - If you try to commit but haven’t staged your changes (i.e., you forget to run `git add`), Git will not include those changes in your commit. Always run `git status` to ensure everything is staged.
 
+### One-liner
+```bash
+git add . && git commit -m "Updating guides" && git push origin main
+```
+
 #### Recap:
 1. `git status` — Check what files have changed.
 2. `git add .` or `git add <file>` — Stage changes for commit.
