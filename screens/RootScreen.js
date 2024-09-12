@@ -1,27 +1,20 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { ImageBackground, SafeAreaView, StyleSheet } from 'react-native';
-import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';  // Import splash screen package
 import { useState, useEffect } from 'react';
+import { loadAssets } from '../components/ui/assetLoader';
 
 // Prevent the splash screen from hiding automatically
 SplashScreen.preventAutoHideAsync();
 
 const RootScreen = ({children}) => {
-  const [fontsLoaded, setFontsLoaded] = useState(false);
-
-  const loadFonts = async () => {
-    await Font.loadAsync({
-      'open-sans': require('../assets/fonts/OpenSans-Regular.ttf'),  // Replace with your font file
-      'open-sans-bold': require('../assets/fonts/OpenSans-Bold.ttf'),
-    });
-  };
+  const [appLoaded, setAppLoaded] = useState(false);
 
   useEffect(() => {
     const prepare = async () => {
       try {
-        await loadFonts(); // Load fonts
-        setFontsLoaded(true);
+        await loadAssets(); // Load fonts
+        setAppLoaded(true);
       } catch (e) {
         console.warn(e);
       } finally {
@@ -33,8 +26,8 @@ const RootScreen = ({children}) => {
     prepare();
   }, []);
 
-  if (!fontsLoaded) {
-    return null;  // Render nothing while fonts are loading
+  if (!appLoaded) {
+    return null;  // Render nothing while app is loading
   }
 
   return (

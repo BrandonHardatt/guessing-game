@@ -2,26 +2,29 @@ import { Audio } from 'expo-av';
 
 class AudioPlayer {
   constructor() {
-    this.soundObject = null; // The sound object representing the audio
+    this.sound = new Audio.Sound(); 
   }
+
+  async unload() {
+
+  };
 
   // Method to load the sound file
   async load(filePath) {
     try {
       // If a sound is already loaded, unload it before loading a new one
-      if (this.soundObject) {
-        await this.soundObject.unloadAsync();
-        this.soundObject = null;
+      if (this.sound) {
+        await this.sound.unloadAsync();
+        this.sound = null;
       }
 
       // Load the new sound file
-      const { sound } = await Audio.Sound.createAsync(filePath);
-      this.soundObject = sound;
+      this.sound = await Audio.Sound.createAsync(filePath);
 
       // Set playback status update to handle the end of playback
-      this.soundObject.setOnPlaybackStatusUpdate(this.onPlaybackStatusUpdate.bind(this));
+      this.sound.setOnPlaybackStatusUpdate(this.onPlaybackStatusUpdate.bind(this));
 
-      console.log('Sound loaded successfully');
+      //console.log('Sound loaded successfully');
     } catch (error) {
       console.error('Error loading sound:', error);
     }
@@ -29,12 +32,12 @@ class AudioPlayer {
 
   // Method to play the loaded sound
   async play() {
-    if (this.soundObject) {
+    if (this.sound) {
       try {
-        await this.soundObject.playAsync();
-        console.log('Playing sound...');
+        await this.sound.playAsync();
+        //console.log('Playing sound...');
       } catch (error) {
-        console.error('Error playing sound:', error);
+        //console.error('Error playing sound:', error);
       }
     } else {
       console.log('No sound object available. Load a sound first.');
@@ -43,12 +46,12 @@ class AudioPlayer {
 
   // Method to stop and unload the sound
   async stop() {
-    if (this.soundObject) {
+    if (this.sound) {
       try {
-        await this.soundObject.stopAsync();
-        await this.soundObject.unloadAsync();
-        this.soundObject = null;
-        console.log('Sound stopped and unloaded.');
+        await this.sound.stopAsync();
+        await this.sound.unloadAsync();
+        this.sound = null;
+        //console.log('Sound stopped and unloaded.');
       } catch (error) {
         console.error('Error stopping/unloading sound:', error);
       }
@@ -58,10 +61,26 @@ class AudioPlayer {
   // Callback function for handling playback status updates
   async onPlaybackStatusUpdate(status) {
     if (status.didJustFinish) {
-      console.log('Sound finished playing.');
+      //console.log('Sound finished playing.');
       await this.stop();  // Automatically stop and unload when the sound finishes
     }
   }
+
+  async setAudioMode() {
+    try {
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: false,
+        interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DO_NOT_MIX,
+        playsInSilentModeIOS: true,
+        shouldDuckAndroid: true,
+        interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DO_NOT_MIX,
+        playThroughEarpieceAndroid: false,
+      });
+    } catch (error) {
+      console.error('Error setting audio mode:', error);
+    }
+  }
+
 }
 
 export const audioPlayer = new AudioPlayer();

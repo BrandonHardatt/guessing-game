@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import Title from "../components/ui/Title";
 import { generateRandomIntegerExcluding } from "../util/util";
 import GuessContainer from "../components/game/GuessContainer";
-import COLORS from "../constants/colors";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
 import { FontAwesome5 } from '@expo/vector-icons';
