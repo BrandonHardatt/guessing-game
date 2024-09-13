@@ -7,7 +7,7 @@ import { loadAssets } from '../components/ui/assetLoader';
 // Prevent the splash screen from hiding automatically
 SplashScreen.preventAutoHideAsync();
 
-const RootScreen = ({children}) => {
+const RootScreen = ({children, backgroundImage}) => {
   const [appLoaded, setAppLoaded] = useState(false);
 
   useEffect(() => {
@@ -33,9 +33,9 @@ const RootScreen = ({children}) => {
   return (
     <LinearGradient colors={['#4e0329', '#ddb52f']} style={styles.screen}>
       <ImageBackground 
-        source={require('../assets/images/background.png')}
+        source={backgroundImage || require('../assets/images/background.png')} 
         style={styles.screen}
-        imageStyle={styles.backgroundImage}
+        imageStyle={styles.background}
       >
         <SafeAreaView style={styles.children}>
           {children}
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
   },
-  backgroundImage: {
+  background: {
     opacity: 0.15
   },
   children: {

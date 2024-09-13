@@ -38,7 +38,7 @@ const App = () => {
     }
   }, [userNumber, gameIsOver]);
 
-  let screen;
+  let screen, backgroundImage;
 
   switch (currentScreen) {
     case SCREENS.PLAY:
@@ -46,6 +46,7 @@ const App = () => {
       break;
     case SCREENS.GAME_OVER:
       screen = <GameOverScreen onRestart={handleRestartGame} />;
+      backgroundImage = require('./assets/images/success.png');
       break;
     case SCREENS.START:
     default:
@@ -53,7 +54,7 @@ const App = () => {
   }
 
   return (
-    <RootScreen>
+    <RootScreen backgroundImage={backgroundImage}>
       {screen}
     </RootScreen>
   );
