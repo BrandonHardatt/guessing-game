@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "noEmit": true,
+    "strict": true,
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "allowJs": false,
+    "jsx": "react-native",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "useUnknownInCatchVariables": true,
+    "noImplicitOverride": true,
+    "paths": {
+      "~/*": ["src/*"],
+      "test/*": ["test/*"]
+    },
+    "typeRoots": ["src/types", "node_modules/@types"],
+    "baseUrl": "."
+  },
+  "include": ["src", "test"]
+}
